@@ -46,6 +46,7 @@ module DisplayText
   end
 
   INSTRUCTIONS = <<~TEXT
+
     WELCOME TO MASTERMIND
     _______________________________________________
 
