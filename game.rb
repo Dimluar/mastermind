@@ -26,8 +26,7 @@ class Game
 
   private
 
-  attr_reader :code, :rounds, :winner
-  attr_accessor :guesser_code
+  attr_reader :code, :rounds, :winner, :guesser_code
 
   def set_code
     code = []
