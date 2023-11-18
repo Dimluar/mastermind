@@ -38,6 +38,7 @@ class Game
   end
 
   def guess_code
+    puts "\nMake your guess:"
     loop do
       @guesser_code = gets.chomp.split('').map(&:to_i)
       break if valid_code?
@@ -100,3 +101,5 @@ class Game
     get_winner(clues, round)
   end
 end
+
+Game.new.play
