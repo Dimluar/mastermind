@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'display'
+
 # Game foundations
 class Game
+  include DisplayText
+
   def initialize
     @rounds = 12
     @code = set_code
@@ -11,13 +15,8 @@ class Game
     round = rounds
     while round.positive?
       puts "\nTries: #{round}"
-
       clues = play_round
-
-      p clues
-
       round -= 1
-
       test_game_over(clues, round)
       break unless winner.nil?
     end
@@ -56,7 +55,9 @@ class Game
     clues = [0, 0]
     round_guessed = []
     clues, round_guessed = count_correct_guesses(clues, round_guessed)
-    count_included_numbers(clues, round_guessed)
+    clues = count_included_numbers(clues, round_guessed)
+    display_colored_round(guesser_code, clues)
+    clues
   end
 
   def count_correct_guesses(clues, round_guessed)
@@ -99,6 +100,3 @@ class Game
     get_winner(clues, round)
   end
 end
-
-game = Game.new
-game.play
