@@ -58,7 +58,7 @@ module DisplayText
     - \e[41m   \e[0m: Correct number and position.
     - \e[107m   \e[0m: Correct number in wrong position.
 
-    They can go from 0 to 4 and they do not tell you which number the correspont to.
+    They can go from 0 to 4 and they do not tell you which number they correspond to.
     _______________________________________________
 
   TEXT
