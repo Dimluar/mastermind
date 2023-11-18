@@ -73,10 +73,10 @@ class Game
   end
 
   def count_included_numbers(clues, round_guessed)
-    numbers_counted = []
+    numbers_counted = [*round_guessed]
     guesser_code.zip(round_guessed).each do |value, guessed|
-      clues[1] += 1 if number_treated?(guesser_code, code, value) && code.include?(value) && value != guessed
-      numbers_counted.push(value) unless number_treated?(guesser_code, code, value)
+      clues[1] += 1 if !number_treated?(numbers_counted, code, value) && code.include?(value) && value != guessed
+      numbers_counted.push(value) unless number_treated?(numbers_counted, code, value)
     end
     clues
   end
