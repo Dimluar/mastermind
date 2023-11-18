@@ -44,4 +44,27 @@ module DisplayText
     puts "\nAnswer: #{get_colored_code(code)}"
     puts get_winner_text(winner)
   end
+
+  INSTRUCTIONS = <<~TEXT
+    WELCOME TO MASTERMIND
+    _______________________________________________
+
+    In this game you will have to try to guess a code careated by the computer. Each game will have 12 rounds
+    (or tries), for you to do it.
+
+    A code is 4 digits long with each one ranging from 1 to 6. Numbers can be repeated and blanck values are not
+    permited.
+
+    After each try, next to your code, clues will be displayed:
+    - \e[41m   \e[0m: Correct number and position.
+    - \e[107m   \e[0m: Correct number in wrong position.
+
+    They can go from 0 to 4 and they do not tell you which number the correspont to.
+    _______________________________________________
+
+  TEXT
+
+  def display_instructions
+    puts INSTRUCTIONS
+  end
 end
