@@ -21,7 +21,7 @@ class Game
       break unless winner.nil?
     end
 
-    p code, winner
+    display_winner(winner, code)
   end
 
   private
@@ -101,5 +101,3 @@ class Game
     get_winner(clues, round)
   end
 end
-
-Game.new.play

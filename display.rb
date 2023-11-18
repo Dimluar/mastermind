@@ -34,4 +34,14 @@ module DisplayText
   def display_colored_round(code_array, clues)
     puts get_colored_round(code_array, clues)
   end
+
+  def get_winner_text(winner)
+    winner == 'guesser' ? "\nCONGRATULATIONS YOU DID IT!" : "\nOH, BETTER LUCK NEXT TIME!"
+  end
+
+  def display_winner(winner, code)
+    puts '---------------------------------------------------'
+    puts "\nAnswer: #{get_colored_code(code)}"
+    puts get_winner_text(winner)
+  end
 end
