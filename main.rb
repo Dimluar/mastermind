@@ -8,7 +8,8 @@ end
 
 def play?
   answer = gets.chomp.downcase.strip
-  get_answer unless %w[yes no].include?(answer)
+  return play? unless %w[yes no].include?(answer)
+
   answer == 'yes'
 end
 
