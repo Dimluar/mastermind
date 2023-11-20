@@ -50,7 +50,7 @@ module DisplayText
     WELCOME TO MASTERMIND
     _______________________________________________
 
-    In this game you will have to try to guess a code careated by the computer. Each game will have 12 rounds (or tries), for you to do it.
+    In this game you will have to try to guess a code created by the computer. Each game will have 12 rounds (or tries), for you to do it.
 
     A code is 4 digits long with each one ranging from 1 to 6. Numbers can be repeated and blanck values are not permited.
 
