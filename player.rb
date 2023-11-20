@@ -4,7 +4,7 @@
 class Player
   attr_accessor :mode
 
-  def initialize(gamemode)
+  def initialize(gamemode = 'guesser')
     @mode = gamemode
   end
 
