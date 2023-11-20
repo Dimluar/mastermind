@@ -82,8 +82,8 @@ class Game
   end
 
   def get_winner(clues, round)
-    @winner = 'guesser' if clues[0] == 4
     @winner = 'creator' if round.zero?
+    @winner = 'guesser' if clues[0] == 4
   end
 
   def test_game_over(clues, round)
