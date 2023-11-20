@@ -58,7 +58,10 @@ module DisplayText
     - \e[41m   \e[0m: Correct number and position.
     - \e[107m   \e[0m: Correct number in wrong position.
 
-    They can go from 0 to 4 and they do not tell you which number they correspond to.
+    The clues can go from 0 to 4 and they do not tell you which number they correspond to.
+
+    As an example output:
+    "1234" + enter -> \e[101m 1 \e[102m 2 \e[103m 3 \e[104m 4 \e[0m \e[41m   \e[0m \e[41m   \e[0m \e[107m   \e[0m
     _______________________________________________
 
   TEXT
