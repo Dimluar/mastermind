@@ -30,14 +30,6 @@ class Game
 
   attr_reader :code, :rounds, :winner, :guesser_code, :player
 
-  def set_code
-    code = []
-    4.times do
-      code.push(rand(1..6))
-    end
-    code
-  end
-
   def set_guesser_code
     player.guess_code if player.mode == 'guesser'
   end
