@@ -36,20 +36,6 @@ class Game
     code
   end
 
-  def guess_code
-    puts "\nMake your guess:"
-    loop do
-      @guesser_code = gets.chomp.split('').map(&:to_i)
-      break if valid_code?
-
-      puts "\nIntroduce a valid code."
-    end
-  end
-
-  def valid_code?
-    guesser_code.all? { |number| (1..6).include?(number) } && guesser_code.length == 4
-  end
-
   def play_round
     guess_code
     clues = [0, 0]
