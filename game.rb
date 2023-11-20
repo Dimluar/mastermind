@@ -2,15 +2,17 @@
 
 require_relative 'display'
 require_relative 'player'
+require_relative 'computer'
 
 # Game foundations
 class Game
   include DisplayText
 
   def initialize
-    @rounds = 12
-    @code = set_code
     @player = Player.new
+    @computer = Computer.new
+    @rounds = 12
+    @code = set_creator_code
   end
 
   def play
@@ -28,7 +30,11 @@ class Game
 
   private
 
-  attr_reader :code, :rounds, :winner, :guesser_code, :player
+  attr_reader :code, :rounds, :winner, :guesser_code, :player, :computer
+
+  def set_creator_code
+    computer.set_code if player.mode == 'guesser'
+  end
 
   def set_guesser_code
     player.guess_code if player.mode == 'guesser'
