@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'display'
+require_relative 'player'
 
 # Game foundations
 class Game
@@ -9,6 +10,7 @@ class Game
   def initialize
     @rounds = 12
     @code = set_code
+    @player = Player.new
   end
 
   def play
@@ -26,7 +28,7 @@ class Game
 
   private
 
-  attr_reader :code, :rounds, :winner, :guesser_code
+  attr_reader :code, :rounds, :winner, :guesser_code, :player
 
   def set_code
     code = []
@@ -36,8 +38,12 @@ class Game
     code
   end
 
+  def set_guesser_code
+    player.guess_code if player.mode == 'guesser'
+  end
+
   def play_round
-    guess_code
+    @guesser_code = set_guesser_code
     clues = [0, 0]
     round_guessed = []
     clues, round_guessed = count_correct_guesses(clues, round_guessed)
@@ -86,3 +92,5 @@ class Game
     get_winner(clues, round)
   end
 end
+
+Game.new.play
