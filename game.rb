@@ -3,23 +3,27 @@
 require_relative 'display'
 require_relative 'player'
 require_relative 'computer'
+require_relative 'code_tester'
 
 # Game foundations
 class Game
   include DisplayText
+  include CodeTest
 
   def initialize
-    @player = Player.new
+    @player = Player.new('creator')
     @computer = Computer.new
     @rounds = 12
     @code = set_creator_code
+    @series = []
   end
 
   def play
     round = rounds
+    clues = [0, 0]
     while round.positive?
       puts "\nTries: #{round}"
-      clues = play_round
+      clues = play_round(clues)
       round -= 1
       test_game_over(clues, round)
       break unless winner.nil?
@@ -33,46 +37,26 @@ class Game
   attr_reader :code, :rounds, :winner, :guesser_code, :player, :computer
 
   def set_creator_code
-    computer.set_code if player.mode == 'guesser'
+    if player.mode == 'guesser'
+      computer.set_code
+    else
+      player.set_code
+    end
   end
 
-  def set_guesser_code
-    player.guess_code if player.mode == 'guesser'
+  def get_guesser_code(clues)
+    if player.mode == 'guesser'
+      @guesser_code = player.guess_code
+    else
+      @series, @guesser_code = computer.guess_code(@series, @guesser_code, clues)
+    end
   end
 
-  def play_round
-    @guesser_code = set_guesser_code
-    clues = [0, 0]
-    round_guessed = []
-    clues, round_guessed = count_correct_guesses(clues, round_guessed)
-    clues = count_included_numbers(clues, round_guessed)
+  def play_round(clues)
+    get_guesser_code(clues)
+    clues = compare_result(code, guesser_code)
     display_colored_round(guesser_code, clues)
     clues
-  end
-
-  def count_correct_guesses(clues, round_guessed)
-    guesser_code.each.with_index do |value, index|
-      if value == code[index]
-        clues[0] += 1
-        round_guessed.push(value)
-      else
-        round_guessed.push(0)
-      end
-    end
-    [clues, round_guessed]
-  end
-
-  def count_included_numbers(clues, round_guessed)
-    numbers_counted = [*round_guessed]
-    guesser_code.zip(round_guessed).each do |value, guessed|
-      clues[1] += 1 if !number_treated?(numbers_counted, code, value) && code.include?(value) && value != guessed
-      numbers_counted.push(value) unless number_treated?(numbers_counted, code, value)
-    end
-    clues
-  end
-
-  def number_treated?(var1, var2, number)
-    var1.tally[number] == var2.tally[number]
   end
 
   def game_over?(clues, round)
