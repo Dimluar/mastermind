@@ -35,20 +35,18 @@ module DisplayText
     puts get_colored_round(code_array, clues)
   end
 
-  def get_winner_text(winner)
-    winner == 'guesser' ? "\nCONGRATULATIONS YOU DID IT!" : "\nOH, BETTER LUCK NEXT TIME!"
-  end
-
-  def display_winner(winner, code)
+  def display_winner(player, winner, code)
     puts '---------------------------------------------------'
     puts "\nAnswer: #{get_colored_code(code)}"
-    puts get_winner_text(winner)
+    puts get_winner_text(player, winner)
   end
 
   INSTRUCTIONS = <<~TEXT
 
     WELCOME TO MASTERMIND
     _______________________________________________
+
+    -GUESSER:
 
     In this game you will have to try to guess a code created by the computer. Each game will have 12 rounds (or tries), for you to do it.
 
@@ -62,11 +60,35 @@ module DisplayText
 
     As an example output:
     "1234" + enter -> \e[101m 1 \e[102m 2 \e[103m 3 \e[104m 4 \e[0m \e[41m   \e[0m \e[41m   \e[0m \e[107m   \e[0m
+
+    -CREATOR:
+
+    This time you will be the one creating the code, with the above guidelines.
+
+    After selecting your code the computer it's going to try to guess it.
     _______________________________________________
 
   TEXT
 
   def self.display_instructions
     puts INSTRUCTIONS
+  end
+
+  private
+
+  def get_winner_text(player, winner)
+    if player.mode == 'guesser'
+      winner_guesser(winner)
+    else
+      winner_creator(winner)
+    end
+  end
+
+  def winner_guesser(winner)
+    winner == 'guesser' ? "\nCONGRATULATIONS YOU DID IT!" : "\nOH, BETTER LUCK NEXT TIME!"
+  end
+
+  def winner_creator(winner)
+    winner == 'guesser' ? "\nUPS, SEEMS LIKE THE COMPUTER GUESSED IT!" : "\nTHAT'S UNEXPECTED! GOOD JOB!"
   end
 end

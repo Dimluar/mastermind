@@ -29,7 +29,7 @@ class Game
       break unless winner.nil?
     end
 
-    display_winner(winner, code)
+    display_winner(player, winner, code)
   end
 
   private
