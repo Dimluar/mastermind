@@ -66,7 +66,7 @@ module DisplayText
 
   TEXT
 
-  def display_instructions
+  def self.display_instructions
     puts INSTRUCTIONS
   end
 end

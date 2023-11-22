@@ -10,8 +10,8 @@ class Game
   include DisplayText
   include CodeTest
 
-  def initialize
-    @player = Player.new('creator')
+  def initialize(mode)
+    @player = Player.new(mode)
     @computer = Computer.new
     @rounds = 12
     @code = set_creator_code
@@ -74,5 +74,3 @@ class Game
     get_winner(clues, round)
   end
 end
-
-Game.new.play

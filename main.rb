@@ -2,8 +2,18 @@
 
 require_relative 'game'
 
-def init_game
-  Game.new.play
+def init_game(mode)
+  Game.new(mode).play
+end
+
+def choose_mode
+  puts "\nWhich one do you want to be? (guesser, creator)"
+  mode = gets.chomp.downcase.strip
+  unless %w[guesser creator].include?(mode)
+    puts "\nChoose a valid gamemode."
+    choose_mode
+  end
+  mode
 end
 
 def play?
@@ -16,7 +26,8 @@ end
 def yes
   puts "\n_______________________________________________"
   puts "\nReady... Set... GO!"
-  init_game
+
+  init_game(choose_mode)
 end
 
 def no
@@ -38,6 +49,6 @@ def start
   start
 end
 
-Game.new.display_instructions
+DisplayText.display_instructions
 puts "\nReady to play? (yes, no)"
 start
