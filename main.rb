@@ -26,6 +26,7 @@ end
 def yes
   puts "\n_______________________________________________"
   puts "\nReady... Set... GO!"
+  sleep(1)
 
   init_game(choose_mode)
 end

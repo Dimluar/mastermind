@@ -15,6 +15,7 @@ class Computer
   end
 
   def guess_code(options, last_guess, clues)
+    sleep(1)
     return first_option if options.empty?
 
     series = options.filter do |option|
